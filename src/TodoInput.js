@@ -4,7 +4,7 @@ import './TodoInput.css'
 function submit (props, e) {
   if (e.key === 'Enter') {
     if (e.target.value.trim() !== '') {
-      props.onSubmit(e)
+      props.onSubmit(e) //???
     }
   }
 }
@@ -19,6 +19,8 @@ function changeTitle (props, e) {
 export default function (props) {
   return <input type="text" value={props.content}
     className="TodoInput"
+    // 提示说 尝试一下 onChange 吧
     onChange={changeTitle.bind(null, props)}
+    // 监听回车事件,绑定this
     onKeyPress={submit.bind(null, props)}/>
 }
