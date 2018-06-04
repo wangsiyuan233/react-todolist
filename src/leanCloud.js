@@ -74,6 +74,7 @@ export const TodoModel = {
   }
 }
 
+// 点击注册后使用 LeanCloud API 注册
 export function signUp (email, username, password, successFn, errorFn) {
   // 新建 AVUser 对象实例
   var user = new AV.User()
@@ -104,6 +105,7 @@ export function signIn (username, password, successFn, errorFn) {
   })
 }
 
+// 用户进入页面时，读取上次登录的 user
 export function getCurrentUser () {
   let user = AV.User.current()
   if (user) {

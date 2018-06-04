@@ -3,6 +3,11 @@ import './UserDialog.css'
 import {signUp, signIn, sendPasswordResetEmail} from './leanCloud'
 import ForgotPasswordForm from './ForgotPasswordForm'
 import SignInOrSignUp from './SignInOrSignUp'
+
+
+// 父组件向子组件传值用props，自己改变状态用state
+// 登录注册对话框
+
 export default class UserDialog extends Component{
   constructor(props){
     super(props)
@@ -15,12 +20,17 @@ export default class UserDialog extends Component{
       }
     }
   }
+
+  //  signIn 和 signUp 相互转化
+  // 点击注册后使用 LeanCloud API 注册
   signUp(e){
     e.preventDefault()
     let {email, username, password} = this.state.formData
     let success = (user)=>{
       this.props.onSignUp.call(null, user)
     }
+
+    // 展示友好的错误信息
     let error = (error)=>{
       switch(error.code){
         case 202:
@@ -33,14 +43,20 @@ export default class UserDialog extends Component{
     }
     signUp(email, username, password, success, error)
   }
+
+  // 仿照注册，完成登录功能
   signIn(e){
     e.preventDefault()
     let {username, password} = this.state.formData
     let success = (user)=>{
       this.props.onSignIn.call(null, user)
     }
+
+    // 展示友好的错误信息
     let error = (error)=>{
       switch(error.code){
+
+        // 报错时处理的方式
         case 210:
           alert('用户名与密码不匹配')
           break
@@ -80,16 +96,21 @@ export default class UserDialog extends Component{
       </div>
     )
   }
+  // 忘记密码
   showForgotPassword(){
     let stateCopy = JSON.parse(JSON.stringify(this.state))
     stateCopy.selectedTab = 'forgotPassword'
     this.setState(stateCopy)
   }
+
+  // 添加返回登录按钮
   returnToSignIn(){
     let stateCopy = JSON.parse(JSON.stringify(this.state))
     stateCopy.selectedTab = 'signInOrSignUp'
     this.setState(stateCopy)
   }
+
+  // 重置密码
   resetPassword(e){
     e.preventDefault()
     sendPasswordResetEmail(this.state.formData.email)
