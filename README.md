@@ -108,15 +108,11 @@
 
 - 第三步：删除测试代码
 
-- 第四步：
-
-在 addTodo 的时候调用 TodoModel.create，调用成功后把 id 记下来，方便后面更新这个 todo，你可以在页面上测试一下，看看效果
+- 第四步：在 addTodo 的时候调用 TodoModel.create，调用成功后把 id 记下来，方便后面更新这个 todo，你可以在页面上测试一下，看看效果
 
 请务必测试一下哦~
 
-- 第五步：
-
-在 constructor 中发起请求获取所有 Todo
+- 第五步：在 constructor 中发起请求获取所有 Todo
 
 这样做存在两个问题：
 
